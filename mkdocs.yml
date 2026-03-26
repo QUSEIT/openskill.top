@@ -1,0 +1,46 @@
+site_name: OpenSkill.Top
+site_url: https://openskill.top
+site_description: OpenClaw 实践博客 - 技能自动化工作流
+site_author: OpenSkill Team
+
+theme:
+  name: material
+  language: zh
+  palette:
+    primary: deep orange
+    accent: orange
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+  alternate:
+    - name: 中文
+      link: /
+      lang: zh
+    - name: English
+      link: /en/
+      lang: en
+
+nav:
+  - 首页: zh/index.md
+  - 安装配置:
+      - zh/安装配置/index.md
+  - 技能实践:
+      - zh/技能实践/index.md
+  - 技能分享:
+      - zh/技能分享/index.md
+  - 应用案例:
+      - zh/应用案例/index.md
+  - English:
+      - Home: en/index.md
+      - Installation: en/installation/index.md
+      - Skill Practice: en/skill-practice/index.md
+      - Skill Sharing: en/skill-sharing/index.md
+      - Use Cases: en/use-cases/index.md
+
+plugins:
+  - search
