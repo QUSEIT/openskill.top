@@ -27,6 +27,9 @@ theme:
       link: /en/
       lang: en
 
+extra_css:
+  - stylesheets/extra.css
+
 nav:
   - 首页: zh/index.md
   - 安装配置:

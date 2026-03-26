@@ -1,0 +1,31 @@
+/* Pure black top bar */
+.md-header {
+    background-color: #000000 !important;
+}
+
+/* Hide header title (OpenSkill.Top) */
+.md-header__title {
+    display: none !important;
+}
+
+/* Center and enlarge logo */
+.md-header__logo {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.md-header__logo img {
+    height: 60px !important;  /* 2x default height */
+    max-height: 60px !important;
+}
+
+/* Pure black navigation bar */
+.md-tabs {
+    background-color: #000000 !important;
+}
+
+/* Footer background */
+.md-footer {
+    background-color: #000000 !important;
+}
