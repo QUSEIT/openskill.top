@@ -1,6 +1,6 @@
 # OpenSkill.Top
 
-OpenClaw 实践博客，使用 MkDocs 构建，支持中英文双语。
+OpenClaw 公开课，使用 MkDocs 构建，支持中英文双语。
 
 ## 域名
 

@@ -26,7 +26,7 @@ cat > site/index.html << 'EOF'
 <html>
 <head>
     <meta charset="utf-8">
-    <title>OpenSkill.Top - OpenClaw 实践博客</title>
+    <title>OpenSkill.Top - OpenClaw 公开课</title>
     <meta http-equiv="refresh" content="5; url=zh/">
     <style>
         body {
@@ -69,7 +69,7 @@ cat > site/index.html << 'EOF'
 </head>
 <body>
     <div class="container">
-        <h1>OpenSkill.Top - OpenClaw 实践博客</h1>
+        <h1>OpenSkill.Top - OpenClaw 公开课</h1>
         <div class="languages">
             <a href="zh/" class="lang-btn">中文</a>
             <a href="en/" class="lang-btn">English</a>
