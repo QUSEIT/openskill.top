@@ -48,7 +48,6 @@ if git show-ref --verify --quiet refs/heads/gh-pages; then
     git checkout gh-pages
 else
     git checkout --orphan gh-pages
-    git rm -rf . -- ':!deploy.sh' -- ':!build.sh'
 fi
 
 # Remove old files (except .git, deploy.sh, build.sh)
