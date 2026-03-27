@@ -1,0 +1,50 @@
+/* Pure black header background */
+.md-header {
+    background-color: #000000 !important;
+}
+
+/* Hide header title (OpenSkill.Top) */
+.md-header__title {
+    display: none !important;
+}
+
+/* Center and enlarge logo */
+.md-header__button.md-logo img {
+
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 192px !important;
+    height: 55.5px !important;
+}
+
+.md-header__logo img {
+    height: 82px !important;
+    max-height: 82px !important;
+}
+
+/* Header height increase */
+.md-header__inner {
+    height: 96px !important;
+}
+
+/* Pure black navigation bar */
+.md-tabs {
+    background-color: #000000 !important;
+}
+
+/* White text for tabs */
+.md-tabs__link {
+    color: #ffffff !important;
+    font-size: 16px !important;
+}
+
+/* Orange text for active tab */
+.md-tabs__link--active {
+    color: #ff6d00 !important;
+}
+
+/* Footer background */
+.md-footer {
+    background-color: #000000 !important;
+}

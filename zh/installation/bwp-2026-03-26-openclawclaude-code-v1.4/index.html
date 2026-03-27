@@ -1,0 +1,1588 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="OpenClaw 公开课 - 技能自动化工作流">
+      
+      
+        <meta name="author" content="OpenSkill Team">
+      
+      
+        <link rel="canonical" href="https://openskill.top/zh/installation/bwp-2026-03-26-openclawclaude-code-v1.4/">
+      
+      
+        <link rel="prev" href="../bwp-2026-03-25-openclaw-v1.1/">
+      
+      
+        <link rel="next" href="../../skill-practice/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手 - OpenSkill.Top</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#openclawclaude-codeai" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="OpenSkill.Top" class="md-header__button md-logo" aria-label="OpenSkill.Top" data-md-component="logo">
+      
+  <img src="../../../static/openskill.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OpenSkill.Top
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  安装配置
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../skill-practice/" class="md-tabs__link">
+          
+  
+  
+  技能实践
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../skill-sharing/" class="md-tabs__link">
+          
+  
+  
+  技能分享
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../use-cases/" class="md-tabs__link">
+          
+  
+  
+  应用案例
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="OpenSkill.Top" class="md-nav__button md-logo" aria-label="OpenSkill.Top" data-md-component="logo">
+      
+  <img src="../../../static/openskill.png" alt="logo">
+
+    </a>
+    OpenSkill.Top
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装配置
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    安装配置
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装配置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bwp-2026-03-25-openclaw-v1.1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    更安全地部署OpenClaw：我的容器化隔离实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我为什么要写这个系列
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我的场景：为什么非要这么折腾？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openclaw-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方案选型：为什么 OpenClaw + Claude Code？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openclaw-claude-code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一部分：在 OpenClaw 容器中安装 Claude Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第一部分：在 OpenClaw 容器中安装 Claude Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 前置准备
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 安装 Claude Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 配置 API Key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二部分：飞书桥接部署
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二部分：飞书桥接部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 架构设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-claude-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 安装 claude-client
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 飞书应用配置（关键步骤）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 启动服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 验证：我的第一次交互
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我踩过的坑（省你两小时）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="我踩过的坑（省你两小时）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1claude-code-tty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑1：Claude Code 需要 TTY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑2：飞书消息长度限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑3：会话状态丢失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑4：文件权限问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本篇完成度 &amp; 下篇预告
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我的建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    技能实践
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    技能实践
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skill-practice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    技能实践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    技能分享
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    技能分享
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../skill-sharing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    技能分享
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用案例
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    应用案例
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../use-cases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用案例
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我为什么要写这个系列
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我的场景：为什么非要这么折腾？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openclaw-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方案选型：为什么 OpenClaw + Claude Code？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openclaw-claude-code_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一部分：在 OpenClaw 容器中安装 Claude Code
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第一部分：在 OpenClaw 容器中安装 Claude Code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 前置准备
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-claude-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 安装 Claude Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 配置 API Key
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二部分：飞书桥接部署
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第二部分：飞书桥接部署">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 架构设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-claude-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 安装 claude-client
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 飞书应用配置（关键步骤）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 启动服务
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 验证：我的第一次交互
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我踩过的坑（省你两小时）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="我踩过的坑（省你两小时）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1claude-code-tty" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑1：Claude Code 需要 TTY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑2：飞书消息长度限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑3：会话状态丢失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        坑4：文件权限问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本篇完成度 &amp; 下篇预告
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        我的建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="openclawclaude-codeai">在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手</h1>
+<h2 id="_1">我为什么要写这个系列</h2>
+<p>之前分享了安全部署 OpenClaw 的实践经验。今天进入更硬核的部分：把 Claude Code 装进 OpenClaw 容器，再用飞书做遥控器。</p>
+<p>这不是炫技。我是真的需要一个随时待命的AI开发助手——在地铁上、在会议间隙、甚至躺在沙发上，打开手机就能让 Claude 帮我写代码、改 BUG、做重构。</p>
+<p>而且我要让它在国内环境下稳定运行。这是我踩过坑之后找到的方案。</p>
+<p>这个系列会分三篇：
+- <strong>上篇（本文）</strong>：从零开始，把 Claude Code 装进 OpenClaw 容器，飞书能叫到它
+- <strong>中篇</strong>：Deploy Bot 发布流程定制，以及飞书 Bot-to-Bot 的配置——让 AI 员工之间能相互协作
+- <strong>下篇</strong>：完整的 AI Agent 协作团队，从需求提出到自动部署的闭环</p>
+<hr />
+<h2 id="_2">我的场景：为什么非要这么折腾？</h2>
+<p>先交代一下我的实际需求，你判断一下适不适合你：</p>
+<p><strong>场景一：碎片时间开发</strong>
+下午带娃在游乐场，产品经理在群里说「登录按钮样式要改」。我打开飞书，@Claude Bot：「把 <code>/root/projects/web/src/components/LoginButton.tsx</code> 的背景色改成品牌蓝，圆角加大」。两分钟后收到回复：「已修改，diff 如下...」</p>
+<p><strong>场景二：复杂任务异步处理</strong>
+晚上8点，我扔给 Claude 一个任务：「重构用户模块，把耦合的业务逻辑拆成独立服务」。它默默干到凌晨，第二天早上我验收代码、提出修改意见，它继续迭代。</p>
+<p><strong>场景三：多 Agent 协作</strong>
+我在飞书群里说：「@PM Bot 我要一个新功能」。PM Bot 拆解任务 → @Claude Bot 写代码 → 完成后 @Deploy Bot 自动部署 → 所有人收到通知。</p>
+<p><strong>核心诉求：让 Claude Code 变成我团队的一员，而不是一个需要开电脑才能用的工具。</strong></p>
+<hr />
+<h2 id="openclaw-claude-code">方案选型：为什么 OpenClaw + Claude Code？</h2>
+<p>你可能问：直接用 Claude 的网页版或者 App 不就行了？</p>
+<p>我试过，不行。原因：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude 网页版</td>
+<td>每次都要登录，代码片段复制粘贴很痛苦</td>
+</tr>
+<tr>
+<td>Claude App</td>
+<td>手机端不能操作服务器文件</td>
+</tr>
+<tr>
+<td>Cursor/Trae</td>
+<td>需要打开 IDE，碎片时间不方便</td>
+</tr>
+<tr>
+<td>Claude 官方 Discord Bot</td>
+<td>国内访问不稳定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>OpenClaw + Claude Code 的优势：</strong>
+1. <strong>容器化</strong>：Claude Code 跑在服务器里，24小时在线
+2. <strong>飞书接入</strong>：国内团队都在用，消息即指令
+3. <strong>文件持久化</strong>：代码写在 <code>/root/projects</code>，容器内外都能访问
+4. <strong>可扩展</strong>：后续能接入 Deploy Bot、PM Bot，形成团队</p>
+<p>这是我自己验证过的最优路径。</p>
+<hr />
+<h2 id="openclaw-claude-code_1">第一部分：在 OpenClaw 容器中安装 Claude Code</h2>
+<h3 id="11">1.1 前置准备</h3>
+<p>假设你已经按照昨天的文章把 OpenClaw 跑起来了。检查容器状态：</p>
+<pre><code class="language-bash">docker ps | grep openclaw
+</code></pre>
+<p>进入容器，直接跳到工作目录 <code>/root</code>（这也是容器和宿主机共享数据的路径）：</p>
+<pre><code class="language-bash">docker exec -it -w /root openclaw /bin/bash
+</code></pre>
+<p>确认你在 <code>/root</code> 目录下。后续所有项目代码都会放在这里。</p>
+<h3 id="12-claude-code">1.2 安装 Claude Code</h3>
+<p>OpenClaw 容器已经带了 Node.js，直接装：</p>
+<pre><code class="language-bash">npm install -g @anthropic-ai/claude-code
+</code></pre>
+<p>验证安装：</p>
+<pre><code class="language-bash">claude --version
+</code></pre>
+<p>看到版本号就是成功了。</p>
+<h3 id="13-api-key">1.3 配置 API Key</h3>
+<p>Claude Code 需要 <code>ANTHROPIC_API_KEY</code> 环境变量。配置方法和国内平替模型（Kimi、MiniMax、DeepSeek 等）一样：</p>
+<ol>
+<li>把 API Key 写进 <code>~/.bashrc</code> 或者 <code>/root/.env</code></li>
+<li>如果用国产平替，设置 <code>OPENAI_API_KEY</code> 和 <code>OPENAI_BASE_URL</code> 指向对应端点</li>
+<li>确保 Claude Code 启动时能读到这些变量</li>
+</ol>
+<p>测试一下：</p>
+<pre><code class="language-bash">claude
+</code></pre>
+<p>输入 <code>hello</code>，有回复就是 OK。按 <code>Ctrl+D</code> 退出。</p>
+<hr />
+<h2 id="_3">第二部分：飞书桥接部署</h2>
+<h3 id="21">2.1 架构设计</h3>
+<p>先搞清楚数据流：</p>
+<pre><code>我（飞书）
+  ↓ @Claude Bot
+Claude Bot（飞书 Bot，跑在容器里）
+  ↓ 本地调用
+Claude Code（同一容器内）
+  ↓ 读写文件
+/root/projects（持久化目录）
+</code></pre>
+<p><strong>关键点：</strong>
+- Claude Bot 和 Claude Code 在同一个 OpenClaw 容器里
+- 通过本地进程调用，不走网络
+- 代码存在 <code>/root/projects</code>，容器重启不丢</p>
+<h3 id="22-claude-client">2.2 安装 claude-client</h3>
+<p>回到容器里：</p>
+<pre><code class="language-bash">docker exec -it -w /root openclaw /bin/bash
+
+git clone https://github.com/Hanson/claude-client.git claude-feishu
+cd claude-feishu
+npm install
+</code></pre>
+<p>创建 <code>.env</code>：</p>
+<pre><code class="language-bash">FEISHU_APP_ID=cli_xxxxxxxxxxxx
+FEISHU_APP_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+FEISHU_ENCRYPT_KEY=your_encrypt_key
+FEISHU_VERIFICATION_TOKEN=your_verification_token
+ANTHROPIC_API_KEY=sk-ant-api03-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+CLAUDE_MODEL=claude-3-7-sonnet-20250219
+PORT=3000
+</code></pre>
+<p>这些值从飞书开发者平台获取，下一节详细说。</p>
+<h3 id="23">2.3 飞书应用配置（关键步骤）</h3>
+<p>这部分我踩过坑，按我的步骤来：</p>
+<p><strong>Step 1：创建应用</strong>
+- 打开 <a href="https://open.feishu.cn/">飞书开发者平台</a>
+- 创建「企业自建应用」
+- 记录 App ID 和 App Secret</p>
+<p><strong>Step 2：开启机器人能力</strong>
+- 左侧菜单「凭证与基础信息」→ 拿到 App ID 和 App Secret
+- 「事件订阅」→ 拿到 Encrypt Key 和 Verification Token</p>
+<p><strong>Step 3：申请权限</strong>
+进入「权限管理」，添加这三个：
+- <code>im:chat:readonly</code> —— 获取群组信息
+- <code>im:message.group_msg</code> —— 接收群消息
+- <code>im:message:send_as_bot</code> —— 以机器人身份发消息</p>
+<p><strong>Step 4：事件订阅（重要）</strong>
+- 进入「事件与回调」→「事件订阅」
+- 添加事件：<code>im.message.receive_v1</code>
+- <strong>不用填请求地址 URL</strong>，claude-client 用长连接接收</p>
+<p><strong>Step 5：card.action.trigger 配置（容易漏）</strong>
+- 「事件与回调」→「回调设置」Tab
+- 点击「回调」
+- 选中 <code>card.action.trigger</code> 并保存</p>
+<p><strong>Step 6：发布</strong>
+- 「版本管理与发布」→ 创建版本
+- 申请发布，通过审核
+- 把机器人拉进目标群</p>
+<h3 id="24">2.4 启动服务</h3>
+<pre><code class="language-bash">npm run build
+npm start
+</code></pre>
+<p>看到 <code>Server running on port 3000</code> 就成功了。</p>
+<p><strong>后台运行：</strong></p>
+<pre><code class="language-bash">npm install -g pm2
+pm2 start npm --name &quot;claude-feishu&quot; -- start
+</code></pre>
+<h3 id="25">2.5 验证：我的第一次交互</h3>
+<p>在飞书群里 @你的机器人：</p>
+<pre><code>@ClaudeBot 在 /root/projects/test 目录下创建一个 Python 脚本，实现斐波那契数列
+</code></pre>
+<p>期待回复：
+1. 确认收到任务
+2. 创建目录和文件
+3. 返回代码内容
+4. 告诉你文件路径</p>
+<p>如果看到这步，恭喜你，基础链路通了。</p>
+<hr />
+<h2 id="_4">我踩过的坑（省你两小时）</h2>
+<h3 id="1claude-code-tty">坑1：Claude Code 需要 TTY</h3>
+<p>错误表现：调用 Claude Code 时卡住或报错 <code>stdin is not a tty</code></p>
+<p>解决：用 <code>script</code> 命令包装，或者确保调用环境有伪终端。</p>
+<h3 id="2">坑2：飞书消息长度限制</h3>
+<p>Claude 回复太长会被截断。解决方案是中篇要讲的——分段发送 + 关键信息摘要。</p>
+<h3 id="3">坑3：会话状态丢失</h3>
+<p>每次@机器人都是新会话，Claude 记不住之前说过什么。下篇会讲怎么用 session 文件保持上下文。</p>
+<h3 id="4">坑4：文件权限问题</h3>
+<p>容器内写的文件，宿主机可能读不了。确保 <code>/root/projects</code> 的权限设置正确。</p>
+<hr />
+<h2 id="_5">本篇完成度 &amp; 下篇预告</h2>
+<p><strong>本文你已完成：</strong>
+- ✅ OpenClaw 容器内安装 Claude Code
+- ✅ 飞书 Bot 桥接部署
+- ✅ 基础交互验证</p>
+<p><strong>中篇预告（Deploy Bot + Bot-to-Bot）：</strong>
+- Deploy Bot 的实现：代码写完后自动构建、预览、发布
+- 飞书 Bot-to-Bot 配置：让 PM Bot、Claude Bot、Deploy Bot 能相互@协作
+- 消息卡片进阶：用飞书的交互卡片做任务进度展示</p>
+<p><strong>下篇预告（完整闭环）：</strong>
+- 从一句话需求到自动部署的全流程
+- 会话状态管理：多轮对话保持上下文
+- 实际业务场景的实战案例</p>
+<hr />
+<h2 id="_6">我的建议</h2>
+<p>如果你也想搭这套系统，我的建议是：</p>
+<ol>
+<li><strong>先跑通本文的基础链路</strong> —— 飞书能叫到 Claude，能写文件，就成功了一半</li>
+<li><strong>选一个真实小任务练手</strong> —— 比如「帮我写个爬虫」或「重构这个函数」，别一上来就搞复杂需求</li>
+<li><strong>记录你的配置和坑</strong> —— 每个人的环境不一样，踩过的坑最有价值</li>
+<li><strong>关注 openskill.top</strong> —— 我会持续更新这个系列的实战经验</li>
+</ol>
+<p>有问题欢迎到群里讨论。</p>
+<p><strong>下一篇见。</strong></p>
+<hr />
+<p><em>Created with bwp on 2026-03-26</em></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
