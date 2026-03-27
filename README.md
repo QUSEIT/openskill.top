@@ -9,10 +9,10 @@ https://openskill.top
 ## 栏目结构
 
 ### 中文内容 (zh/)
-- **安装配置** - OpenClaw 环境搭建、安装和基础配置
-- **技能实践** - 使用 OpenClaw 完成工作任务，定制开发技能
-- **技能分享** - 第三方技能分享与发现
-- **应用案例** - 多技能整合实现自动化工作流
+- **Installation** - OpenClaw 环境搭建、安装和基础配置
+- **Skill Practice** - 使用 OpenClaw 完成工作任务，定制开发技能
+- **Skill Sharing** - 第三方技能分享与发现
+- **Use Cases** - 多技能整合实现自动化工作流
 
 ### English Content (en/)
 - **Installation** - OpenClaw environment setup and configuration
@@ -41,10 +41,10 @@ openskill.top/
 ├── docs/
 │   ├── zh/            # 中文内容
 │   │   ├── index.md
-│   │   ├── 安装配置/
-│   │   ├── 技能实践/
-│   │   ├── 技能分享/
-│   │   └── 应用案例/
+│   │   ├── installation/
+│   │   ├── skill-practice/
+│   │   ├── skill-sharing/
+│   │   └── use-cases/
 │   └── en/            # 英文内容
 │       ├── index.md
 │       ├── installation/

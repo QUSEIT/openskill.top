@@ -4,10 +4,10 @@ OpenClaw 公开课，探索技能自动化工作流的无限可能。
 
 ## 栏目导览
 
-- [安装配置](安装配置/index.md) - 了解如何安装和配置 OpenClaw
-- [技能实践](技能实践/index.md) - 学习使用 OpenClaw 完成工作并定制技能
-- [技能分享](技能分享/index.md) - 发现和分享第三方技能
-- [应用案例](应用案例/index.md) - 探索多项技能整合实现自动化工作流
+- [Installation](installation/index.md) - 了解如何安装和配置 OpenClaw
+- [Skill Practice](skill-practice/index.md) - 学习使用 OpenClaw 完成工作并定制技能
+- [Skill Sharing](skill-sharing/index.md) - 发现和分享第三方技能
+- [Use Cases](use-cases/index.md) - 探索多项技能整合实现自动化工作流
 
 ## 关于 OpenClaw
 

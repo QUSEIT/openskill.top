@@ -32,16 +32,16 @@ extra_css:
 
 nav:
   - 首页: zh/index.md
-  - 安装配置:
-      - zh/安装配置/index.md
-      - 更安全地部署OpenClaw：我的容器化隔离实践: zh/安装配置/bwp-2026-03-25-openclaw-v1.1.md
-      - 在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手: zh/安装配置/bwp-2026-03-26-openclawclaude-code-v1.4.md
-  - 技能实践:
-      - zh/技能实践/index.md
-  - 技能分享:
-      - zh/技能分享/index.md
-  - 应用案例:
-      - zh/应用案例/index.md
+  - Installation:
+      - zh/installation/index.md
+      - 更安全地部署OpenClaw：我的容器化隔离实践: zh/installation/bwp-2026-03-25-openclaw-v1.1.md
+      - 在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手: zh/installation/bwp-2026-03-26-openclawclaude-code-v1.4.md
+  - Skill Practice:
+      - zh/skill-practice/index.md
+  - Skill Sharing:
+      - zh/skill-sharing/index.md
+  - Use Cases:
+      - zh/use-cases/index.md
   - English:
       - Home: en/index.md
       - Installation: en/installation/index.md
