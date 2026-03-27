@@ -87,7 +87,9 @@ fi
 
 # Remove "Made with Material for MkDocs" footer from all HTML files
 echo "Removing MkDocs Material footer..."
-find site -name "*.html" -exec sed -i '/Made with/,/<\/a>/d' {} \;
+for f in site/*.html site/*/*.html site/*/*/*.html; do
+    [ -f "$f" ] && sed -i '' '/Made with/,/<\/a>/d' "$f"
+done
 
 echo ""
 echo "Build complete!"
