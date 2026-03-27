@@ -35,7 +35,7 @@ nav:
   - 安装配置:
       - zh/installation/index.md
       - 更安全地部署OpenClaw：我的容器化隔离实践: zh/installation/bwp-2026-03-25-openclaw-v1.1.md
-      - 在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手: zh/installation/bwp-2026-03-26-openclawclaude-code-v1.4.md
+      - 在OpenClaw容器中部署Claude Code（上）：从零开始搭建你的AI开发助手: zh/installation/bwp-2026-03-26-openclawclaude-code-v1.8.md
   - 技能实践:
       - zh/skill-practice/index.md
   - 技能分享:
